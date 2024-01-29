@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+streamlit = "~=1.28.0"
+openai = "*"
+langchain = "~=0.0.292"
+langchain-openai = "*"
+jq = "*"
+streamlit-chat = "*"
+boto3 = "*"
+prompt-toolkit = "*"
+yaspin = "*"
+replicate = "*"
+loguru = "*"
+tfquery = "*"
+chromadb = "*"
+tiktoken = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
