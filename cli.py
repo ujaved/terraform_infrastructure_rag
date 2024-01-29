@@ -30,7 +30,7 @@ class StreamHandler(BaseCallbackHandler):
         print(token, end ="")
         
 def create_qa_chain(args, files: list[str]):
-    llm = ChatOpenAI(model_name=args.model_id, temperature=0, streaming=True, callbacks=[StreamHandler()])
+    llm = ChatOpenAI(model_name='gpt-4-1106-preview', temperature=0, streaming=True, callbacks=[StreamHandler()])
     if args.model_id == "codellama":
         llm = Replicate(streaming=True, model=REPLICATE_CODE_LLAMA_ENDPOINT, model_kwargs={
                         "temperature": 0, "max_length": 5000}, callbacks=[StreamHandler()])
@@ -47,9 +47,9 @@ def create_qa_chain(args, files: list[str]):
                   Helpful Answer:"""
     
     return ConversationalRetrievalChain.from_llm(llm=llm,
-            retriever=vectordb.as_retriever(),
-            # retriever=vectordb.as_retriever(search_kwargs={"k":10}),
-            combine_docs_chain_kwargs={"prompt": PromptTemplate.from_template(template)},
+            #retriever=vectordb.as_retriever(),
+            retriever=vectordb.as_retriever(search_kwargs={"k":10}),
+            # combine_docs_chain_kwargs={"prompt": PromptTemplate.from_template(template)},
             memory=ConversationBufferMemory(memory_key="chat_history",return_messages=True))  
  
 
